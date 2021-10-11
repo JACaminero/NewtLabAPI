@@ -8,7 +8,8 @@ namespace NewtlabAPI.Services.IServices
     public interface IPruebaExperimentoService
     {
         IEnumerable<PruebaExperimento> GetAll();
-        Task Insert(PruebaExperimento pruebaExperimento);
+        IEnumerable<PruebaExperimento> GetAllPruebasByUser(int userId);
+        Task Insert(PruebaExperimento pruebaExperimento, IEnumerable<PruebaRespuesta> prs);
         Task<PruebaExperimento> GetById(int id);
         bool Update(PruebaExperimento pruebaExperimento);
         bool Delete(int id);

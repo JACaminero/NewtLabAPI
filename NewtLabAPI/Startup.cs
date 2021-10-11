@@ -43,6 +43,7 @@ namespace NewtlabAPI
             services.AddTransient<IBancoPreguntaService, BancoPreguntasServices>();
             services.AddScoped<IUserService, UserService>();
             services.AddTransient<IExperimentoService, ExperimentoService>();
+            services.AddTransient<IPruebaExperimentoService, PruebaExperimentoService> ();
             services.AddTransient<IGuiaExperimento, GuiaExperimentoService>();
             services.AddTransient<IPreguntaService, PreguntaService>();
             services.AddTransient<IRespuestaService, RespuestaService>();

@@ -8,11 +8,15 @@ namespace NewtlabAPI.Models
     public class PruebaExperimento
     {
         public int PruebaExperimentoId { get; set; }
+        public string Titulo { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
         public int BancoPreguntaId { get; set; }
         public BancoPregunta BancoPregunta { get; set; }
         public DateTime FechaTomado { get; set; }
         public int CalificacionObtenida { get; set; }
+        public bool isCerrada { get; set; }
+        public IEnumerable<PruebaRespuesta> PruebaRespuestas { get; set; }
+        public string Periodo { get; set; }
     }
 }

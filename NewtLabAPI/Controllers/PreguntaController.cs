@@ -45,6 +45,8 @@ namespace NewtlabAPI.Controllers
         public async Task<IActionResult> Post([FromBody]Pregunta pregunta)
         {
             pregunta.TipoPreguntaId = 1;
+            pregunta.IsOn = true;
+
             await service.Insert(pregunta);
 
             return Ok(new { message = "Agregado" });

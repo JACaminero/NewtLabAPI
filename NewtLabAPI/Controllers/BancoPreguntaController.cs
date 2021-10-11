@@ -15,10 +15,12 @@ namespace NewtlabAPI.Controllers
     public class BancoPreguntaController : ControllerBase
     {
         private readonly IBancoPreguntaService service;
+        private readonly IPreguntaService pServ;
 
-        public BancoPreguntaController(IBancoPreguntaService service)
+        public BancoPreguntaController(IBancoPreguntaService service, IPreguntaService _pServ)
         {
             this.service = service;
+            pServ = _pServ;
         }
 
         [HttpGet]
@@ -49,10 +51,12 @@ namespace NewtlabAPI.Controllers
                     bancoPreguntaId = i.BancoPreguntaId,
                     tema = i.Tema,
                     fechaCreacion = i.FechaCreacion.ToShortDateString(),
+                    fechaLimite = i.FechaLimite.ToShortDateString(),
                     publicado = i.Publicado,
                     experimento = k,
                     userId = i.UserId,
                     isOn = i.IsOn,
+                    tituloPublicado = i.TituloPublicado,
                 });
             }
             return Ok(returnable);
@@ -71,7 +75,8 @@ namespace NewtlabAPI.Controllers
             fechaLimite = get.FechaLimite.ToShortDateString(),
             publicado = get.Publicado,
             isOn = get.IsOn,
-            });;
+            tituloPublicado = get.TituloPublicado,
+            });
         }
 
         [HttpPost]
@@ -83,7 +88,7 @@ namespace NewtlabAPI.Controllers
                 FechaCreacion =  DateTime.Now,
                 ExperimentoId = bancoPregunta.ExperimentoId,
                 FechaLimite = bancoPregunta.FechaLimite,
-                UserId = bancoPregunta.UserId
+                UserId = bancoPregunta.UserId,
             };
 
             await service.Insert(add);
@@ -106,6 +111,14 @@ namespace NewtlabAPI.Controllers
             return Ok(new { getS } );
         }
 
+        [HttpDelete("on/{id}")]
+        public IActionResult DesEliminarPregunta(int id)
+        {
+            var get = service.Relete(id);
+
+            return Ok(new { message = get + " Eliminado" });
+        }
+
         [HttpDelete("{id}")]
         public IActionResult EliminarPregunta(int id)
         {
@@ -117,7 +130,7 @@ namespace NewtlabAPI.Controllers
         [HttpPut("publicar/{id}")]
         public IActionResult Publicar(int id, [FromBody] LimitVM limit)
         {
-            service.Publicar(id, limit.FechaLimite);
+            service.Publicar(id, limit.FechaLimite, limit.TituloPublicado);
             return Ok(new { message = "done" });
         }
 
@@ -131,5 +144,6 @@ namespace NewtlabAPI.Controllers
     public class LimitVM
     {
         public DateTime FechaLimite { get; set; }
+        public string TituloPublicado{ get; set; }
     }
 }

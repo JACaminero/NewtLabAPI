@@ -12,7 +12,8 @@ namespace NewtlabAPI.Services.IServices
         Task<BancoPregunta> GetById(int id);
         bool Update(BancoPregunta bancoPregunta);
         bool Delete(int id);
-        void Publicar(int id, DateTime limit);
+        bool Relete(int id);
+        void Publicar(int id, DateTime limit, string t);
         void Deshabilitar(int id);
     }
 }

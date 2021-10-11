@@ -42,7 +42,7 @@ namespace NewtlabAPI.Services
             var user = GetAllWithRole().SingleOrDefault(x => x.Username == username && x.Password == password);
 
             // return null if user not found
-            if (user == null) return null;
+            if (user == null || user.IsOn == false) return null;
 
             // authentication successful so generate jwt token
             var token = GenerateJwtToken(user);

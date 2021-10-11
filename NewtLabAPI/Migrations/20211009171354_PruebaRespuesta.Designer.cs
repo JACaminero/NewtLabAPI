@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NewtlabAPI.Data;
 
 namespace NewtlabAPI.Migrations
 {
     [DbContext(typeof(NewtLabContext))]
-    partial class NewtLabContextModelSnapshot : ModelSnapshot
+    [Migration("20211009171354_PruebaRespuesta")]
+    partial class PruebaRespuesta
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,9 +44,6 @@ namespace NewtlabAPI.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Tema")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TituloPublicado")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
@@ -156,17 +155,8 @@ namespace NewtlabAPI.Migrations
                     b.Property<DateTime>("FechaTomado")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Periodo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Titulo")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("UserId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("isCerrada")
-                        .HasColumnType("bit");
 
                     b.HasKey("PruebaExperimentoId");
 
@@ -390,7 +380,7 @@ namespace NewtlabAPI.Migrations
             modelBuilder.Entity("NewtlabAPI.Models.PruebaRespuesta", b =>
                 {
                     b.HasOne("NewtlabAPI.Models.PruebaExperimento", "PE")
-                        .WithMany("PruebaRespuestas")
+                        .WithMany()
                         .HasForeignKey("PEId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -435,11 +425,6 @@ namespace NewtlabAPI.Migrations
             modelBuilder.Entity("NewtlabAPI.Models.Pregunta", b =>
                 {
                     b.Navigation("Respuestas");
-                });
-
-            modelBuilder.Entity("NewtlabAPI.Models.PruebaExperimento", b =>
-                {
-                    b.Navigation("PruebaRespuestas");
                 });
 #pragma warning restore 612, 618
         }

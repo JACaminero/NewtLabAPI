@@ -17,17 +17,6 @@ namespace NewtlabAPI.Services.Service
             this.context = context;
         }
 
-        public bool Delete(int id)
-        {
-            var getId = context.BancoPreguntas.Find(id);
-            //context.BancoPreguntas.Remove(getId);
-            getId.IsOn = false;
-            context.SaveChanges();
-
-            return true;
-
-        }
-
         public IEnumerable<BancoPregunta> GetAll()
         {
            return context.BancoPreguntas.ToList();
@@ -50,11 +39,12 @@ namespace NewtlabAPI.Services.Service
             return true;
         }
 
-        public void Publicar(int id, DateTime limit)
+        public void Publicar(int id, DateTime limit, string t)
         {
             var bp = GetById(id);
             bp.Result.FechaLimite = limit;
             bp.Result.Publicado = true;
+            bp.Result.TituloPublicado = t;
             context.SaveChanges();
         }
 
@@ -63,7 +53,28 @@ namespace NewtlabAPI.Services.Service
             var bp = GetById(id);
             bp.Result.FechaLimite = new DateTime();
             bp.Result.Publicado = false;
+            bp.Result.TituloPublicado = "";
             context.SaveChanges();
+        }
+
+        public bool Delete(int id)
+        {
+            var getId = context.BancoPreguntas.Find(id);
+            //context.BancoPreguntas.Remove(getId);
+            getId.IsOn = false;
+            context.SaveChanges();
+
+            return true;
+        }
+
+        public bool Relete(int id)
+        {
+            var getId = context.BancoPreguntas.Find(id);
+            //context.BancoPreguntas.Remove(getId);
+            getId.IsOn = true;
+            context.SaveChanges();
+
+            return true;
         }
     }
 }

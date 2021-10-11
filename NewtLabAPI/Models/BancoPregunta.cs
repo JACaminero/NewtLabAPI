@@ -9,6 +9,7 @@ namespace NewtlabAPI.Models
     {
         public int BancoPreguntaId { get; set; }
         public string Tema { get; set; }
+        public string TituloPublicado { get; set; }
         public DateTime FechaCreacion{ get; set; }
         public int ExperimentoId { get; set; }
         public Experimento Experimento { get; set; }
