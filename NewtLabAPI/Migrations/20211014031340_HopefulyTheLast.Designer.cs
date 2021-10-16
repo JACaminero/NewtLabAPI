@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NewtlabAPI.Data;
 
 namespace NewtlabAPI.Migrations
 {
     [DbContext(typeof(NewtLabContext))]
-    partial class NewtLabContextModelSnapshot : ModelSnapshot
+    [Migration("20211014031340_HopefulyTheLast")]
+    partial class HopefulyTheLast
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -159,14 +161,8 @@ namespace NewtlabAPI.Migrations
                     b.Property<int>("CalificacionObtenida")
                         .HasColumnType("int");
 
-                    b.Property<int>("CalificacionTotal")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("FechaTomado")
                         .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsCerrada")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Periodo")
                         .HasColumnType("nvarchar(max)");
@@ -176,6 +172,9 @@ namespace NewtlabAPI.Migrations
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("isCerrada")
+                        .HasColumnType("bit");
 
                     b.HasKey("PruebaExperimentoId");
 

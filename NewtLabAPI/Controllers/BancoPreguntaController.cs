@@ -29,7 +29,7 @@ namespace NewtlabAPI.Controllers
             List<object> returnable = new List<object>();
             var users = service.GetAll().ToList();
             string k = "Gravedad";
-            
+
             foreach (var i in users)
             {
                 switch (i.ExperimentoId)
@@ -57,6 +57,8 @@ namespace NewtlabAPI.Controllers
                     userId = i.UserId,
                     isOn = i.IsOn,
                     tituloPublicado = i.TituloPublicado,
+                    descripcion = i.Descripcion,
+                    instruccion = i.Instruccion
                 });
             }
             return Ok(returnable);
@@ -67,25 +69,28 @@ namespace NewtlabAPI.Controllers
         {
             var get = await service.GetById(id);
 
-            return Ok(new { 
-            bancoPreguntaId = get.BancoPreguntaId,
-            userId = get.UserId,
-            tema = get.Tema,
-            fechaCreacion = get.FechaCreacion,
-            fechaLimite = get.FechaLimite.ToShortDateString(),
-            publicado = get.Publicado,
-            isOn = get.IsOn,
-            tituloPublicado = get.TituloPublicado,
+            return Ok(new
+            {
+                bancoPreguntaId = get.BancoPreguntaId,
+                userId = get.UserId,
+                tema = get.Tema,
+                fechaCreacion = get.FechaCreacion,
+                fechaLimite = get.FechaLimite.ToShortDateString(),
+                publicado = get.Publicado,
+                isOn = get.IsOn,
+                tituloPublicado = get.TituloPublicado,
+                descripcion = get.Descripcion,
+                instruccion = get.Instruccion,
             });
         }
 
         [HttpPost]
-        public async Task<IActionResult> InsertarBancoPregunta([FromBody]BancoPregunta bancoPregunta)
+        public async Task<IActionResult> InsertarBancoPregunta([FromBody] BancoPregunta bancoPregunta)
         {
             var add = new BancoPregunta
             {
                 Tema = bancoPregunta.Tema,
-                FechaCreacion =  DateTime.Now,
+                FechaCreacion = DateTime.Now,
                 ExperimentoId = bancoPregunta.ExperimentoId,
                 FechaLimite = bancoPregunta.FechaLimite,
                 UserId = bancoPregunta.UserId,
@@ -108,7 +113,7 @@ namespace NewtlabAPI.Controllers
             var getS = service.Update(getId);
 
 
-            return Ok(new { getS } );
+            return Ok(new { getS });
         }
 
         [HttpDelete("on/{id}")]
@@ -130,7 +135,7 @@ namespace NewtlabAPI.Controllers
         [HttpPut("publicar/{id}")]
         public IActionResult Publicar(int id, [FromBody] LimitVM limit)
         {
-            service.Publicar(id, limit.FechaLimite, limit.TituloPublicado);
+            service.Publicar(id, limit.FechaLimite, limit.TituloPublicado, limit.Descripcion, limit.Instruccion);
             return Ok(new { message = "done" });
         }
 
@@ -144,6 +149,9 @@ namespace NewtlabAPI.Controllers
     public class LimitVM
     {
         public DateTime FechaLimite { get; set; }
-        public string TituloPublicado{ get; set; }
+        public string TituloPublicado { get; set; }
+        public string Descripcion { get; set; }
+        public string Instruccion { get; set; }
+
     }
 }

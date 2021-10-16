@@ -13,7 +13,7 @@ namespace NewtlabAPI.Services.IServices
         bool Update(BancoPregunta bancoPregunta);
         bool Delete(int id);
         bool Relete(int id);
-        void Publicar(int id, DateTime limit, string t);
+        void Publicar(int id, DateTime limit, string t, string descripcion, string instruccion);
         void Deshabilitar(int id);
     }
 }

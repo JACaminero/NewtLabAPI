@@ -15,7 +15,8 @@ namespace NewtlabAPI.Models
         public BancoPregunta BancoPregunta { get; set; }
         public DateTime FechaTomado { get; set; }
         public int CalificacionObtenida { get; set; }
-        public bool isCerrada { get; set; }
+        public int CalificacionTotal { get; set; }
+        public bool IsCerrada { get; set; }
         public IEnumerable<PruebaRespuesta> PruebaRespuestas { get; set; }
         public string Periodo { get; set; }
     }

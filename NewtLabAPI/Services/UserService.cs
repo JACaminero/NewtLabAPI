@@ -25,6 +25,7 @@ namespace NewtlabAPI.Services
         void Modify(User u);
         User ValidateRole(User u);
         void Delete(int id);
+        void On(int id);
     }
     
     public class UserService: IUserService
@@ -123,20 +124,29 @@ namespace NewtlabAPI.Services
                 case "Estudiante":
                     u.Role = db.Roles.Find(1);
                     break;
+                case "Admin":
+                    u.Role = db.Roles.Find(4);
+                    break;
             }
             return u;
         }
 
         public void Delete(int id)
         {
-            var u = GetById(id);
+            var u = db.Users.Find(id);
             u.IsOn = false;
+            db.SaveChanges();
+        }
+        public void On(int id)
+        {
+            var u = db.Users.Find(id);
+            u.IsOn = true;
             db.SaveChanges();
         }
 
         public void Modify(User u)
         {
-            var current = GetById(u.UserId);
+            var current = db.Users.Find(u.UserId);
             current.Username = u.Username;
             current.Name = u.Name;
             current.LastName1 = u.LastName1;

@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using NewtlabAPI.Data;
 using NewtlabAPI.Models;
+using NewtlabAPI.Services;
 using NewtlabAPI.Services.IServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace NewtlabAPI.Controllers
 {
@@ -15,9 +17,11 @@ namespace NewtlabAPI.Controllers
     public class PruebaController : ControllerBase
     {
         private readonly IPruebaExperimentoService peServ;
-        public PruebaController(IPruebaExperimentoService _peServ)
+        private readonly IUserService uServ;
+        public PruebaController(IPruebaExperimentoService _peServ, IUserService _uServ)
         {
             peServ = _peServ;
+            uServ = _uServ;
         }
 
         [HttpPost]
@@ -44,17 +48,34 @@ namespace NewtlabAPI.Controllers
                     fechaTomado = i.FechaTomado.ToShortDateString(),
                     calificacionObtenida = i.CalificacionObtenida,
                     bancoPreguntaId = i.BancoPreguntaId,
-                    i.isCerrada,
+                    i.IsCerrada,
                     periodo = i.Periodo
                 });
             }
             return Ok(new { data = returnable, message = "Operacion exitosa" });
         }
 
-        [HttpGet("nota/{id}")]
-        public async Task<IActionResult> Get(int id)
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
         {
-            return Ok(new { message = "Operacion exitosa" });
+            var p = await peServ.GetById(id);
+            return Ok(p);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var list = peServ.GetAll().ToList();
+            for (int i = 0; i < list.Count; i++)
+            {
+                list[i].User = uServ.GetById(list[i].UserId);
+            }
+
+            return Ok(new {
+                data = list, 
+                message = "Operacion exitosa" 
+            });
         }
 
         public class PruebaVM

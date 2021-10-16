@@ -66,6 +66,10 @@ namespace NewtlabAPI.Services.Service
             return context.PruebaExperimentos.Where(pe => pe.UserId == userId);
         }
 
+        public IEnumerable<PruebaExperimento> GetAll()
+        {
+            return context.PruebaExperimentos;
+        }
 
         public int CalcCalificacion(IEnumerable<PruebaRespuesta> prs)
         {
@@ -102,11 +106,6 @@ namespace NewtlabAPI.Services.Service
             //{
 
             //}
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<PruebaExperimento> GetAll()
-        {
             throw new NotImplementedException();
         }
 

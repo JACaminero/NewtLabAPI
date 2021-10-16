@@ -18,5 +18,7 @@ namespace NewtlabAPI.Models
         public int UserId { get; set; }
         public User User { get; set; }
         public bool IsOn { get; set; }
+        public string Instruccion { get; set; }
+        public string Descripcion { get; set; }
     }
 }
