@@ -55,6 +55,12 @@ namespace NewtlabAPI.Controllers
             return Ok(new { data = returnable, message = "Operacion exitosa" });
         }
 
+        [HttpGet("respuestas/{id}")]
+        public IActionResult GetRespuestasPrueba(int id)
+        {
+            var prs = peServ.GetPruebaRespuestasByPruebaId(id);
+            return Ok(prs);
+        }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)

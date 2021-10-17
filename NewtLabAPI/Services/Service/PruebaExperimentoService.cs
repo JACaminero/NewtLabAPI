@@ -61,6 +61,17 @@ namespace NewtlabAPI.Services.Service
             return correctas;
         }
 
+        public IEnumerable<PruebaRespuesta> GetPruebaRespuestasByPruebaId(int id)
+        {
+            var prs = context.PruebaRespuesta.Where(p => p.PEId == id).ToList();
+            for (int i = 0; i < prs.Count; i++)
+            {
+                prs[i].Pregunta = GetPreguntasInPrueba(prs).Where(l => prs[i].PreguntaId == l.PreguntaId).FirstOrDefault();
+                prs[i].Respuesta = GetRespuestasInPrueba(prs).Where(l => prs[i].RespuestaId == l.RespuestaId).FirstOrDefault();
+            }
+            return prs;
+        } 
+
         public IEnumerable<PruebaExperimento> GetAllPruebasByUser(int userId)
         {
             return context.PruebaExperimentos.Where(pe => pe.UserId == userId);

@@ -7,6 +7,7 @@ namespace NewtlabAPI.Services.IServices
 {
     public interface IPruebaExperimentoService
     {
+        IEnumerable<PruebaRespuesta> GetPruebaRespuestasByPruebaId(int id);
         IEnumerable<PruebaExperimento> GetAll();
         IEnumerable<PruebaExperimento> GetAllPruebasByUser(int userId);
         Task Insert(PruebaExperimento pruebaExperimento, IEnumerable<PruebaRespuesta> prs);

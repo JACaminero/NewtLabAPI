@@ -27,7 +27,9 @@ namespace NewtlabAPI.Controllers
             var response = _userService.Authenticate(am.Username, am.Password);
 
             if (response == null)
-                return BadRequest(new { message = "Usuario o contraseña incorrectos, o usuario ha sido desactivado" });
+                return BadRequest(new { message = "Usuario o contraseña incorrectos" });
+            else if (!response.IsOn)
+                return BadRequest(new { message = "Usuario ha sido desactivado" });
 
             return Ok(response);
         }

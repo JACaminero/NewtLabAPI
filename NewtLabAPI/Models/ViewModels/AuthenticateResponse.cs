@@ -13,6 +13,7 @@ namespace NewtlabAPI.Models
         public string Name { get; set; }
         public string LastName1 { get; set; }
         public string LastName2 { get; set; }
+        public bool IsOn { get; set; }
         public string Cedula { get; set; }
         public string Phone { get; set; }
         public string Street { get; set; }
@@ -33,6 +34,7 @@ namespace NewtlabAPI.Models
             Nacimiento = user.Nacimiento;
             Role = user.Role.Description;
             Token = token;
+            IsOn = user.IsOn;
         }
     }
 }
