@@ -37,10 +37,12 @@ namespace NewtlabAPI.Controllers
         [HttpGet("user/{id}")]
         public async Task<IActionResult> GetPruebasByUserId(int id)
         {
+            int califTotal = 0;
             List<object> returnable = new List<object>();
             var ps = peServ.GetAllPruebasByUser(id);
             foreach (var i in ps)
             {
+                califTotal += i.CalificacionObtenida;
                 returnable.Add(new
                 {
                     userId = i.UserId,
@@ -52,7 +54,7 @@ namespace NewtlabAPI.Controllers
                     periodo = i.Periodo
                 });
             }
-            return Ok(new { data = returnable, message = "Operacion exitosa" });
+            return Ok(new { data = returnable, califTotal, message = "Operacion exitosa" });
         }
 
         [HttpGet("respuestas/{id}")]

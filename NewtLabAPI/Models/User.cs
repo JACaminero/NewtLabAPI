@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NewtlabAPI.Models
 {
@@ -33,5 +34,11 @@ namespace NewtlabAPI.Models
         public string Sector { get; set; }
         public DateTime Nacimiento { get; set; }
         public bool IsOn { get; set; }
+        [NotMapped]
+        public string Matricula { 
+            get {
+                return $"{Name[0]}{LastName1[0]}{LastName2[0]}{Nacimiento.Year}{Nacimiento.Month}"; 
+            } 
+        }
     }
 }

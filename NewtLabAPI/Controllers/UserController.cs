@@ -53,7 +53,8 @@ namespace NewtlabAPI.Controllers
                     Cedula = i.Cedula,
                     Phone = i.Phone,
                     Birth = i.Nacimiento.ToShortDateString(),
-                    IsOn = i.IsOn
+                    IsOn = i.IsOn,
+                    matricula = i.Matricula
                 });
             }
             return Ok(returnable);

@@ -67,8 +67,8 @@ namespace NewtlabAPI.Services
                     Cedula = user.Cedula,
                     Phone = user.Phone,
                     Nacimiento = user.Nacimiento,
-                    IsOn = user.IsOn
-                })
+                    IsOn = user.IsOn,
+                    })
                 .OrderByDescending(u => u.IsOn);
             }
 
