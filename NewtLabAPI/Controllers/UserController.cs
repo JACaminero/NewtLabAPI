@@ -1,4 +1,4 @@
-﻿ using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NewtlabAPI.Services;
 using NewtlabAPI.Models;
@@ -54,7 +54,8 @@ namespace NewtlabAPI.Controllers
                     Phone = i.Phone,
                     Birth = i.Nacimiento.ToShortDateString(),
                     IsOn = i.IsOn,
-                    matricula = i.Matricula
+                    matricula = i.Matricula,
+                    grado = i.Grado
                 });
             }
             return Ok(returnable);
@@ -76,7 +77,9 @@ namespace NewtlabAPI.Controllers
                 Cedula = i.Cedula,
                 Phone = i.Phone,
                 Birth = i.Nacimiento.ToShortDateString(),
-                IsOn = i.IsOn
+                IsOn = i.IsOn,
+                matricula = i.Matricula,
+                grado = i.Grado
             });
         }
 

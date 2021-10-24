@@ -11,7 +11,7 @@ namespace NewtlabAPI.Models
     {
         [Key]
         public int UserId { get; set; }
-        [MaxLength(20)]
+        [MaxLength(200)]
         public string Username { get; set; }
         [MaxLength(20)]
         public string Password { get; set; }
@@ -30,6 +30,8 @@ namespace NewtlabAPI.Models
         public string Street { get; set; }
         [MaxLength(300)]
         public string HouseNumber { get; set; }
+        [MaxLength(300)]
+        public string Grado { get; set; }
         [MaxLength(300)]
         public string Sector { get; set; }
         public DateTime Nacimiento { get; set; }

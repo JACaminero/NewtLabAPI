@@ -68,7 +68,8 @@ namespace NewtlabAPI.Services
                     Phone = user.Phone,
                     Nacimiento = user.Nacimiento,
                     IsOn = user.IsOn,
-                    })
+                    Grado = user.Grado
+                })
                 .OrderByDescending(u => u.IsOn);
             }
 

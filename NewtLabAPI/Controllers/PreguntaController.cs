@@ -62,7 +62,6 @@ namespace NewtlabAPI.Controllers
 
             service.Update(getId);
 
-
             return Ok(new { message = "Actualizado" });
         }
 
