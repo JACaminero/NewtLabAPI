@@ -55,7 +55,8 @@ namespace NewtlabAPI.Controllers
                     Birth = i.Nacimiento.ToShortDateString(),
                     IsOn = i.IsOn,
                     matricula = i.Matricula,
-                    grado = i.Grado
+                    grado = i.Grado,
+                    seccion = i.Seccion
                 });
             }
             return Ok(returnable);

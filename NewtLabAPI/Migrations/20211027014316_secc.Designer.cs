@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NewtlabAPI.Data;
 
 namespace NewtlabAPI.Migrations
 {
     [DbContext(typeof(NewtLabContext))]
-    partial class NewtLabContextModelSnapshot : ModelSnapshot
+    [Migration("20211027014316_secc")]
+    partial class secc
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,9 +39,6 @@ namespace NewtlabAPI.Migrations
 
                     b.Property<DateTime>("FechaLimite")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Grado")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Instruccion")
                         .HasColumnType("nvarchar(max)");

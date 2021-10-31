@@ -49,6 +49,7 @@ namespace NewtlabAPI.Controllers
                     titulo = i.Titulo,
                     fechaTomado = i.FechaTomado.ToShortDateString(),
                     calificacionObtenida = i.CalificacionObtenida,
+                    calificacionTotal = i.CalificacionTotal,
                     bancoPreguntaId = i.BancoPreguntaId,
                     i.IsCerrada,
                     periodo = i.Periodo

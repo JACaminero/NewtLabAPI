@@ -19,7 +19,10 @@ namespace NewtlabAPI.Services.Service
 
         public IEnumerable<BancoPregunta> GetAll()
         {
-           return context.BancoPreguntas.ToList();
+
+            //var pes = context.PruebaExperimentos.
+            //    .Where(pe => pe.Titulo == bp.Result.TituloPublicado).ToList();
+            return context.BancoPreguntas.ToList();
         }
 
         public async Task<BancoPregunta> GetById(int id) => await context.BancoPreguntas.FindAsync(id);
@@ -53,6 +56,12 @@ namespace NewtlabAPI.Services.Service
         public void Deshabilitar(int id)
         {
             var bp = GetById(id);
+            var pes = context.PruebaExperimentos
+                .Where(pe => pe.Titulo == bp.Result.TituloPublicado).ToList();
+            for (int i = 0; i < pes.Count; i++)
+            {
+                pes[i].IsCerrada = true;
+            }
             bp.Result.FechaLimite = new DateTime();
             bp.Result.Publicado = false;
             bp.Result.TituloPublicado = "";
@@ -62,7 +71,6 @@ namespace NewtlabAPI.Services.Service
         public bool Delete(int id)
         {
             var getId = context.BancoPreguntas.Find(id);
-            //context.BancoPreguntas.Remove(getId);
             getId.IsOn = false;
             context.SaveChanges();
 

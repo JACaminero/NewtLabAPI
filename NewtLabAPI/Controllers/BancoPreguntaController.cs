@@ -58,7 +58,8 @@ namespace NewtlabAPI.Controllers
                     isOn = i.IsOn,
                     tituloPublicado = i.TituloPublicado,
                     descripcion = i.Descripcion,
-                    instruccion = i.Instruccion
+                    instruccion = i.Instruccion,
+                    grado = i.Grado
                 });
             }
             return Ok(returnable);
@@ -94,6 +95,7 @@ namespace NewtlabAPI.Controllers
                 ExperimentoId = bancoPregunta.ExperimentoId,
                 FechaLimite = bancoPregunta.FechaLimite,
                 UserId = bancoPregunta.UserId,
+                Grado = bancoPregunta.Grado
             };
 
             await service.Insert(add);

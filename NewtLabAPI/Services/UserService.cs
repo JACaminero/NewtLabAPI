@@ -27,8 +27,8 @@ namespace NewtlabAPI.Services
         void Delete(int id);
         void On(int id);
     }
-    
-    public class UserService: IUserService
+
+    public class UserService : IUserService
     {
         private readonly NewtLabContext db = new NewtLabContext();
         private readonly AppSettings _appSettings;
@@ -42,6 +42,10 @@ namespace NewtlabAPI.Services
         {
             var user = GetAllWithRole().SingleOrDefault(x => x.Username == username && x.Password == password);
 
+            if (user == null)
+            {
+                return null;
+            }
             // authentication successful so generate jwt token
             var token = GenerateJwtToken(user);
 
@@ -68,10 +72,11 @@ namespace NewtlabAPI.Services
                     Phone = user.Phone,
                     Nacimiento = user.Nacimiento,
                     IsOn = user.IsOn,
-                    Grado = user.Grado
+                    Grado = user.Grado,
+                    Seccion = user.Seccion
                 })
                 .OrderByDescending(u => u.IsOn);
-            }
+        }
 
         public User GetByEmail(string email)
         {
@@ -98,12 +103,12 @@ namespace NewtlabAPI.Services
                 "mQ7GCNPaLHm+v/dH/4g5WAwAwyPLTfUuD55C7AFLxk8baedPQdTQd3V0R/kmbMDceMlGrwYF0+8XROAKR7CDHSDFdOffi8JwDVKWxw+XW7deEalQiH2RYB10MVhFJ" +
                 "+AVKeTs39J4VPRziwmy0gKSNAUdqp3srMX1M1L7uopxP5usaER+uu1eZyxAX0PTT+1j8Nfiht5/iz9Tl4aWL0NFNz5N15nzoR4MTUz2DgA8e7e5scOzC3kAQYA==");
             var symkey = new SymmetricSecurityKey(key);
-            var tokenDescriptor = new SecurityTokenDescriptor() 
+            var tokenDescriptor = new SecurityTokenDescriptor()
             {
-                Subject = new ClaimsIdentity(new[] 
+                Subject = new ClaimsIdentity(new[]
                 {
                     new Claim("id", user.UserId.ToString()),
-                    
+
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(symkey, SecurityAlgorithms.HmacSha256Signature)

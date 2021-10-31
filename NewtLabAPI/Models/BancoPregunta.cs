@@ -20,5 +20,6 @@ namespace NewtlabAPI.Models
         public bool IsOn { get; set; }
         public string Instruccion { get; set; }
         public string Descripcion { get; set; }
+        public string Grado { get; set; }
     }
 }

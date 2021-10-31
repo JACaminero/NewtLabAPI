@@ -8,7 +8,7 @@ namespace NewtlabAPI.Models
     public class Pregunta
     {
         public int PreguntaId { get; set; }
-        public int Puntuacion { get; set; }
+        public int Puntuacion { get; set; } 
         public string Descripcion { get; set; }
         public int BancoPreguntaId { get; set; }
         public string TP { get; set; }

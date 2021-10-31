@@ -26,12 +26,14 @@ namespace NewtlabAPI.Services.Service
         {
             pruebaExperimento.Periodo = 
                 DateTime.Now >= new DateTime(DateTime.Now.Year, 9, 1) 
-                && DateTime.Now <= new DateTime(DateTime.Now.Year, 12, 20) ? "Septiembre-Diciembre" : "Enero-Abril";
+                && DateTime.Now <= new DateTime(DateTime.Now.Year, 12, 20) ? $"{DateTime.Now.Year} Septiembre-Diciembre" : $"{DateTime.Now.Year} Enero-Abril";
             pruebaExperimento.FechaTomado = DateTime.Now;
+
             pruebaExperimento.PruebaRespuestas = prs;
+            pruebaExperimento.CalificacionObtenida = CalcCalificacion(prs);
+            
             pruebaExperimento.Titulo = context.BancoPreguntas
                 .Find(pruebaExperimento.BancoPreguntaId).TituloPublicado;
-            pruebaExperimento.CalificacionObtenida = CalcCalificacion(prs);
 
             context.PruebaExperimentos.Add(pruebaExperimento);
 
@@ -107,17 +109,6 @@ namespace NewtlabAPI.Services.Service
             context.SaveChanges();
 
             return true;
-        }
-
-        public int GetNotaAcumulada(int id, DateTime fechaInicio, DateTime fechaFin)
-        {
-
-            //int nota = 0;
-            //foreach (var i in )
-            //{
-
-            //}
-            throw new NotImplementedException();
         }
 
         public bool Delete(int id)

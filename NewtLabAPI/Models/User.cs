@@ -32,6 +32,7 @@ namespace NewtlabAPI.Models
         public string HouseNumber { get; set; }
         [MaxLength(300)]
         public string Grado { get; set; }
+        public string Seccion { get; set; }
         [MaxLength(300)]
         public string Sector { get; set; }
         public DateTime Nacimiento { get; set; }
