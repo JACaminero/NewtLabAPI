@@ -10,8 +10,8 @@ using NewtlabAPI.Data;
 namespace NewtlabAPI.Migrations
 {
     [DbContext(typeof(NewtLabContext))]
-    [Migration("20211023025351_Migrationa")]
-    partial class Migrationa
+    [Migration("20211031142145_RekindledAnew")]
+    partial class RekindledAnew
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,6 +39,9 @@ namespace NewtlabAPI.Migrations
 
                     b.Property<DateTime>("FechaLimite")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Grado")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Instruccion")
                         .HasColumnType("nvarchar(max)");
@@ -317,6 +320,9 @@ namespace NewtlabAPI.Migrations
                     b.Property<int?>("RoleId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Seccion")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Sector")
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
@@ -326,8 +332,8 @@ namespace NewtlabAPI.Migrations
                         .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("Username")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("UserId");
 

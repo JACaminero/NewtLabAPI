@@ -122,13 +122,13 @@ namespace NewtlabAPI.Services
             switch (u.Role.Description)
             {
                 case "Profesor":
-                    u.Role = db.Roles.Find(2);
-                    break;
-                case "Estudiante":
                     u.Role = db.Roles.Find(1);
                     break;
+                case "Estudiante":
+                    u.Role = db.Roles.Find(2);
+                    break;
                 case "Admin":
-                    u.Role = db.Roles.Find(4);
+                    u.Role = db.Roles.Find(3);
                     break;
             }
             return u;
