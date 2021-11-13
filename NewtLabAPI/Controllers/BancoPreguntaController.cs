@@ -34,11 +34,11 @@ namespace NewtlabAPI.Controllers
             {
                 switch (i.ExperimentoId)
                 {
-                    case 8:
+                    case 7:
                         k = "Gravedad";
                         break;
-                    case 7:
-                        k = "Inercia";
+                    case 8:
+                        k = "Poleas";
                         break;
                     case 9:
                         k = "Accion y reaccion";

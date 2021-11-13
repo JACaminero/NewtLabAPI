@@ -25,7 +25,11 @@ namespace NewtlabAPI.Services
         void Modify(User u);
         User ValidateRole(User u);
         void Delete(int id);
+        void DeleteSesion(int id);
+        void OnSesion(int id);
         void On(int id);
+        void InsertSesion(Sesion s);
+        List<Sesion> GetSesion();
     }
 
     public class UserService : IUserService
@@ -140,6 +144,7 @@ namespace NewtlabAPI.Services
             u.IsOn = false;
             db.SaveChanges();
         }
+
         public void On(int id)
         {
             var u = db.Users.Find(id);
@@ -157,7 +162,40 @@ namespace NewtlabAPI.Services
             current.Cedula = u.Cedula;
             current.Phone = u.Phone;
             current.Nacimiento = u.Nacimiento;
+            current.Password = u.Password;
             db.SaveChanges();
         }
+
+        public void InsertSesion(Sesion s)
+        {
+            db.Sesions.Add(s);
+            db.SaveChanges();
+        }
+
+        public List<Sesion> GetSesion()
+        {
+            return db.Sesions.ToList();
+        }
+
+        public void DeleteSesion(int id)
+        {
+            var u = db.Sesions.Find(id);
+            u.IsOn = false;
+            db.SaveChanges();
+        }
+
+        public void OnSesion(int id)
+        {
+            var u = db.Sesions.Find(id);
+            u.IsOn = true;
+            db.SaveChanges();
+        }
+
+        //public void ModSesion(int id)
+        //{
+        //    var u = db.Users.Find(id);
+        //    u.IsOn = true;
+        //    db.SaveChanges();
+        //}
     }
 }

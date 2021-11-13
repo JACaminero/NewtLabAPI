@@ -3,20 +3,22 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NewtlabAPI.Data;
 
 namespace NewtlabAPI.Migrations
 {
     [DbContext(typeof(NewtLabContext))]
-    partial class NewtLabContextModelSnapshot : ModelSnapshot
+    [Migration("20211107195420_Sesion2")]
+    partial class Sesion2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.12")
+                .HasAnnotation("ProductVersion", "5.0.10")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("NewtlabAPI.Models.BancoPregunta", b =>
@@ -113,24 +115,6 @@ namespace NewtlabAPI.Migrations
                     b.HasIndex("ExperimentoId");
 
                     b.ToTable("GuiaExperimentos");
-                });
-
-            modelBuilder.Entity("NewtlabAPI.Models.History", b =>
-                {
-                    b.Property<int>("HistoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Username")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("What")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("HistoryId");
-
-                    b.ToTable("History");
                 });
 
             modelBuilder.Entity("NewtlabAPI.Models.Pregunta", b =>

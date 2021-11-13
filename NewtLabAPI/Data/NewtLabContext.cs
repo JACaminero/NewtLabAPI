@@ -22,6 +22,8 @@ namespace NewtlabAPI.Data
         public DbSet<PruebaRespuesta> PruebaRespuesta { get; set; }
         public DbSet<TipoPregunta> TipoPreguntas { get; set; }
         public DbSet<PruebaExperimento> PruebaExperimentos { get; set; }
+        public DbSet<Sesion> Sesions { get; set; }
+        public DbSet<History> History { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

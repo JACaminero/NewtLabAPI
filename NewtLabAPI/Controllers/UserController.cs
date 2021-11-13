@@ -80,7 +80,9 @@ namespace NewtlabAPI.Controllers
                 Birth = i.Nacimiento.ToShortDateString(),
                 IsOn = i.IsOn,
                 matricula = i.Matricula,
-                grado = i.Grado
+                grado = i.Grado,
+                seccion = i.Seccion
+
             });
         }
 
@@ -101,7 +103,7 @@ namespace NewtlabAPI.Controllers
         {
             if (user == null)
                 return BadRequest(new { message = "Datos invalidos" });
-
+            user.IsOn = true;
             _userService.Modify(user);
 
             return Ok(new { message = $"Exito." });
@@ -118,6 +120,38 @@ namespace NewtlabAPI.Controllers
         public IActionResult Delete(int id)
         {
             _userService.Delete(id);
+            return Ok(new { message = $"Exito." });
+        }
+
+
+        [HttpPost("insert/sesion")]
+        public IActionResult InsertSesion([FromBody] Sesion s)
+        {
+            if (s == null)
+                return BadRequest(new { message = "Datos invalidos" });
+
+            _userService.InsertSesion(s);
+
+            return Ok(new { message = $"Exito. {s}" });
+        }
+
+        [HttpGet("sesion")]
+        public IActionResult GetSesion()
+        {
+           return Ok(_userService.GetSesion());
+        }
+
+        [HttpPut("sesion/on/{id}")]
+        public IActionResult OnS(int id)
+        {
+            _userService.OnSesion(id);
+            return Ok(new { message = $"Exito." });
+        }
+
+        [HttpPut("sesion/delete/{id}")]
+        public IActionResult DeleteS(int id)
+        {
+            _userService.DeleteSesion(id);
             return Ok(new { message = $"Exito." });
         }
     }
