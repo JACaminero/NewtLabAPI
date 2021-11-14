@@ -23,6 +23,19 @@ namespace NewtlabAPI.Controllers
             pServ = _pServ;
         }
 
+        [HttpGet("historico")]
+        public ActionResult GetHist()
+        {
+            return Ok(service.HistoryGet());
+        }
+
+        [HttpPost("historico")]
+        public ActionResult InsertHist([FromBody] History h)
+        {
+            service.HistoryInsert(h);
+            return Ok();
+        }
+
         [HttpGet]
         public async Task<IActionResult> getAll()
         {
@@ -59,7 +72,8 @@ namespace NewtlabAPI.Controllers
                     tituloPublicado = i.TituloPublicado,
                     descripcion = i.Descripcion,
                     instruccion = i.Instruccion,
-                    grado = i.Grado
+                    grado = i.Grado,
+                    califTotalPublicado = i.CalifTotalPublicado
                 });
             }
             return Ok(returnable);
@@ -82,6 +96,7 @@ namespace NewtlabAPI.Controllers
                 tituloPublicado = get.TituloPublicado,
                 descripcion = get.Descripcion,
                 instruccion = get.Instruccion,
+                califTotalPublicado = get.CalifTotalPublicado
             });
         }
 
@@ -137,7 +152,7 @@ namespace NewtlabAPI.Controllers
         [HttpPut("publicar/{id}")]
         public IActionResult Publicar(int id, [FromBody] LimitVM limit)
         {
-            service.Publicar(id, limit.FechaLimite, limit.TituloPublicado, limit.Descripcion, limit.Instruccion);
+            service.Publicar(id, limit.califTotalPublicado, limit.FechaLimite, limit.TituloPublicado, limit.Descripcion, limit.Instruccion);
             return Ok(new { message = "done" });
         }
 
@@ -153,7 +168,9 @@ namespace NewtlabAPI.Controllers
         public DateTime FechaLimite { get; set; }
         public string TituloPublicado { get; set; }
         public string Descripcion { get; set; }
+        public int califTotalPublicado { get; set; }
         public string Instruccion { get; set; }
+
 
     }
 }

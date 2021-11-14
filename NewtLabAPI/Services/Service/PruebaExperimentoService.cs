@@ -29,8 +29,10 @@ namespace NewtlabAPI.Services.Service
                 && DateTime.Now <= new DateTime(DateTime.Now.Year, 12, 20) ? $"{DateTime.Now.Year} Septiembre-Diciembre" : $"{DateTime.Now.Year} Enero-Abril";
             pruebaExperimento.FechaTomado = DateTime.Now;
 
+            int tota = prs.Count();
             pruebaExperimento.PruebaRespuestas = prs;
             pruebaExperimento.CalificacionObtenida = CalcCalificacion(prs);
+            pruebaExperimento.CalificacionObtenidaReal = (pruebaExperimento.CalificacionTotal / tota) * CalcCantidadPregCorrectas(prs);
             
             pruebaExperimento.Titulo = context.BancoPreguntas
                 .Find(pruebaExperimento.BancoPreguntaId).TituloPublicado;
@@ -82,6 +84,20 @@ namespace NewtlabAPI.Services.Service
         public IEnumerable<PruebaExperimento> GetAll()
         {
             return context.PruebaExperimentos;
+        }
+
+        public int CalcCantidadPregCorrectas(IEnumerable<PruebaRespuesta> prs)
+        {
+            var pregs = GetRespuestasInPrueba(prs).ToList();
+            int totalPreg = pregs.Count; 
+            
+            var rCorrec = pregs.Where(rw => rw.EsCorrecta == true).ToList()
+                .Join(GetPreguntasInPrueba(prs).ToList(),
+                r => r.PreguntaId,
+                p => p.PreguntaId,
+                (r, p) => p).ToList();
+
+            return rCorrec.Count;
         }
 
         public int CalcCalificacion(IEnumerable<PruebaRespuesta> prs)

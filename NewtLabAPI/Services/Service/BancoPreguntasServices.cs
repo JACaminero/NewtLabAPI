@@ -19,9 +19,6 @@ namespace NewtlabAPI.Services.Service
 
         public IEnumerable<BancoPregunta> GetAll()
         {
-
-            //var pes = context.PruebaExperimentos.
-            //    .Where(pe => pe.Titulo == bp.Result.TituloPublicado).ToList();
             return context.BancoPreguntas.ToList();
         }
 
@@ -42,7 +39,7 @@ namespace NewtlabAPI.Services.Service
             return true;
         }
 
-        public void Publicar(int id, DateTime limit, string t, string descripcion, string instruccion)
+        public void Publicar(int id, int califTotalPublicado, DateTime limit, string t, string descripcion, string instruccion)
         {
             var bp = GetById(id);
             bp.Result.FechaLimite = limit;
@@ -50,6 +47,7 @@ namespace NewtlabAPI.Services.Service
             bp.Result.TituloPublicado = t;
             bp.Result.Descripcion = descripcion;
             bp.Result.Instruccion = instruccion;
+            bp.Result.CalifTotalPublicado = califTotalPublicado;
             context.SaveChanges();
         }
 
@@ -86,5 +84,20 @@ namespace NewtlabAPI.Services.Service
 
             return true;
         }
+
+        //HISTORY//
+        public bool HistoryInsert(History h)
+        {
+            context.History.Add(h);
+            context.SaveChanges();
+            return true;
+        }
+
+        public List<History> HistoryGet()
+        {
+            return context.History.ToList();
+        }
+
+
     }
 }
