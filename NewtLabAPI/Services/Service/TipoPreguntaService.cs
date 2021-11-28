@@ -28,7 +28,7 @@ namespace NewtlabAPI.Services.Service
 
         public IEnumerable<TipoPregunta> GetAll()
         {
-            throw new NotImplementedException();
+            return context.TipoPreguntas;
         }
 
         public async Task<TipoPregunta> GetById(int id)

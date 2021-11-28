@@ -129,7 +129,6 @@ namespace NewtlabAPI.Controllers
 
             var getS = service.Update(getId);
 
-
             return Ok(new { getS });
         }
 
@@ -170,7 +169,5 @@ namespace NewtlabAPI.Controllers
         public string Descripcion { get; set; }
         public int califTotalPublicado { get; set; }
         public string Instruccion { get; set; }
-
-
     }
 }

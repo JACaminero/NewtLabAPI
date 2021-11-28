@@ -48,6 +48,7 @@ namespace NewtlabAPI
             services.AddTransient<IGuiaExperimento, GuiaExperimentoService>();
             services.AddTransient<IPreguntaService, PreguntaService>();
             services.AddTransient<IRespuestaService, RespuestaService>();
+            services.AddTransient<ITipoPreguntaService, TipoPreguntaService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

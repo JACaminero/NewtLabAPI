@@ -8,6 +8,7 @@ namespace NewtlabAPI.Models
     public class TipoPregunta
     {
         public int TipoPreguntaId { get; set; }
+        public string Concepto { get; set; }
         public string Descripcion { get; set; }
     }
 }

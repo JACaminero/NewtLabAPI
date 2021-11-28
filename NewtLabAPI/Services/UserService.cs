@@ -163,6 +163,8 @@ namespace NewtlabAPI.Services
             current.Phone = u.Phone;
             current.Nacimiento = u.Nacimiento;
             current.Password = u.Password;
+            current.Grado = u.Grado;
+            current.Seccion = u.Seccion;
             db.SaveChanges();
         }
 
