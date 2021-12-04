@@ -18,7 +18,6 @@ namespace NewtlabAPI.Controllers
         public GuiaExperimentoController(IGuiaExperimento service)
         {
             this.service = service;
-
         }
 
         [HttpGet]
@@ -34,33 +33,31 @@ namespace NewtlabAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Insertar(GuiaExperimento experimento)
+        public async Task<IActionResult> Insertar(GuiaExperimento ex)
         {
             var add = new GuiaExperimento
             {
-                Titulo = experimento.Titulo,
-                Descripcion = experimento.Descripcion,
-                Experimento = experimento.Experimento,
-                Instruccion = experimento.Instruccion
+                Titulo = ex.Titulo,
+                Descripcion = ex.Descripcion,
+                Experimento = ex.Experimento,
+                Instruccion = ex.Instruccion
             };
 
-
             await service.Insert(add);
-
 
             return Ok("Agregado!");
         }
 
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> ActualizarGuiaExperimento(int id, GuiaExperimento experimento)
+        public async Task<IActionResult> ActualizarGuiaExperimento(int id, GuiaExperimento ex)
         {
             var getId = await service.GetById(id);
 
-            getId.Titulo = experimento.Titulo;
-            getId.Descripcion = experimento.Descripcion;
-            getId.Experimento = experimento.Experimento;
-            getId.Instruccion = experimento.Instruccion;
+            getId.Titulo = ex.Titulo;
+            getId.Descripcion = ex.Descripcion;
+            getId.Experimento = ex.Experimento;
+            getId.Instruccion = ex.Instruccion;
 
             var update = service.Update(getId);
 

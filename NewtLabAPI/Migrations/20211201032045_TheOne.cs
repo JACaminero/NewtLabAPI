@@ -3,16 +3,74 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NewtlabAPI.Migrations
 {
-    public partial class RekindledAnew : Migration
+    public partial class TheOne : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Experimentos",
+                columns: table => new
+                {
+                    ExperimentoId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Concepto = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Puntuacion = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Experimentos", x => x.ExperimentoId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "History",
+                columns: table => new
+                {
+                    HistoryId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    What = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_History", x => x.HistoryId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    RoleId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.RoleId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Sesions",
+                columns: table => new
+                {
+                    SesionId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Grado = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SesionNombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsOn = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sesions", x => x.SesionId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "TipoPreguntas",
                 columns: table => new
                 {
                     TipoPreguntaId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Concepto = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -21,28 +79,38 @@ namespace NewtlabAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GuiaExperimentos",
+                name: "Users",
                 columns: table => new
                 {
-                    GuiaId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Descripcion = table.Column<int>(type: "int", nullable: false),
-                    Instruccion = table.Column<int>(type: "int", nullable: false),
-                    Titulo = table.Column<int>(type: "int", nullable: false),
-                    ExperimentoId = table.Column<int>(type: "int", nullable: true)
+                    Username = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    RoleId = table.Column<int>(type: "int", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    LastName1 = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    LastName2 = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    Cedula = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    Street = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    HouseNumber = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    Grado = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    Seccion = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Sector = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    Nacimiento = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsOn = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GuiaExperimentos", x => x.GuiaId);
+                    table.PrimaryKey("PK_Users", x => x.UserId);
                     table.ForeignKey(
-                        name: "FK_GuiaExperimentos_Experimentos_ExperimentoId",
-                        column: x => x.ExperimentoId,
-                        principalTable: "Experimentos",
-                        principalColumn: "ExperimentoId",
+                        name: "FK_Users_Roles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Roles",
+                        principalColumn: "RoleId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            
             migrationBuilder.CreateTable(
                 name: "BancoPreguntas",
                 columns: table => new
@@ -56,6 +124,7 @@ namespace NewtlabAPI.Migrations
                     Publicado = table.Column<bool>(type: "bit", nullable: false),
                     FechaLimite = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
+                    CalifTotalPublicado = table.Column<int>(type: "int", nullable: false),
                     IsOn = table.Column<bool>(type: "bit", nullable: false),
                     Instruccion = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -119,6 +188,7 @@ namespace NewtlabAPI.Migrations
                     BancoPreguntaId = table.Column<int>(type: "int", nullable: false),
                     FechaTomado = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CalificacionObtenida = table.Column<int>(type: "int", nullable: false),
+                    CalificacionObtenidaReal = table.Column<int>(type: "int", nullable: false),
                     CalificacionTotal = table.Column<int>(type: "int", nullable: false),
                     IsCerrada = table.Column<bool>(type: "bit", nullable: false),
                     Periodo = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -205,11 +275,6 @@ namespace NewtlabAPI.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GuiaExperimentos_ExperimentoId",
-                table: "GuiaExperimentos",
-                column: "ExperimentoId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Preguntas_BancoPreguntaId",
                 table: "Preguntas",
                 column: "BancoPreguntaId");
@@ -249,15 +314,22 @@ namespace NewtlabAPI.Migrations
                 table: "Respuestas",
                 column: "PreguntaId");
 
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_RoleId",
+                table: "Users",
+                column: "RoleId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "GuiaExperimentos");
+                name: "History");
 
             migrationBuilder.DropTable(
                 name: "PruebaRespuesta");
+
+            migrationBuilder.DropTable(
+                name: "Sesions");
 
             migrationBuilder.DropTable(
                 name: "PruebaExperimentos");

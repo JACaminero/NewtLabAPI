@@ -92,32 +92,6 @@ namespace NewtlabAPI.Migrations
                     b.ToTable("Experimentos");
                 });
 
-            modelBuilder.Entity("NewtlabAPI.Models.GuiaExperimento", b =>
-                {
-                    b.Property<int>("GuiaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Descripcion")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ExperimentoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Instruccion")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Titulo")
-                        .HasColumnType("int");
-
-                    b.HasKey("GuiaId");
-
-                    b.HasIndex("ExperimentoId");
-
-                    b.ToTable("GuiaExperimentos");
-                });
-
             modelBuilder.Entity("NewtlabAPI.Models.History", b =>
                 {
                     b.Property<int>("HistoryId")
@@ -407,15 +381,6 @@ namespace NewtlabAPI.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("NewtlabAPI.Models.GuiaExperimento", b =>
-                {
-                    b.HasOne("NewtlabAPI.Models.Experimento", "Experimento")
-                        .WithMany()
-                        .HasForeignKey("ExperimentoId");
-
-                    b.Navigation("Experimento");
-                });
-
             modelBuilder.Entity("NewtlabAPI.Models.Pregunta", b =>
                 {
                     b.HasOne("NewtlabAPI.Models.BancoPregunta", "BancoPregunta")
@@ -459,7 +424,7 @@ namespace NewtlabAPI.Migrations
                     b.HasOne("NewtlabAPI.Models.PruebaExperimento", "PE")
                         .WithMany("PruebaRespuestas")
                         .HasForeignKey("PEId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("NewtlabAPI.Models.Pregunta", "Pregunta")

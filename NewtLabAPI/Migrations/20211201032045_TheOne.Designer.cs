@@ -10,8 +10,8 @@ using NewtlabAPI.Data;
 namespace NewtlabAPI.Migrations
 {
     [DbContext(typeof(NewtLabContext))]
-    [Migration("20211113183643_History")]
-    partial class History
+    [Migration("20211201032045_TheOne")]
+    partial class TheOne
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,6 +27,9 @@ namespace NewtlabAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CalifTotalPublicado")
+                        .HasColumnType("int");
 
                     b.Property<string>("Descripcion")
                         .HasColumnType("nvarchar(max)");
@@ -89,32 +92,6 @@ namespace NewtlabAPI.Migrations
                     b.HasKey("ExperimentoId");
 
                     b.ToTable("Experimentos");
-                });
-
-            modelBuilder.Entity("NewtlabAPI.Models.GuiaExperimento", b =>
-                {
-                    b.Property<int>("GuiaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Descripcion")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ExperimentoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Instruccion")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Titulo")
-                        .HasColumnType("int");
-
-                    b.HasKey("GuiaId");
-
-                    b.HasIndex("ExperimentoId");
-
-                    b.ToTable("GuiaExperimentos");
                 });
 
             modelBuilder.Entity("NewtlabAPI.Models.History", b =>
@@ -180,6 +157,9 @@ namespace NewtlabAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("CalificacionObtenida")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CalificacionObtenidaReal")
                         .HasColumnType("int");
 
                     b.Property<int>("CalificacionTotal")
@@ -303,6 +283,9 @@ namespace NewtlabAPI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Concepto")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Descripcion")
                         .HasColumnType("nvarchar(max)");
 
@@ -400,15 +383,6 @@ namespace NewtlabAPI.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("NewtlabAPI.Models.GuiaExperimento", b =>
-                {
-                    b.HasOne("NewtlabAPI.Models.Experimento", "Experimento")
-                        .WithMany()
-                        .HasForeignKey("ExperimentoId");
-
-                    b.Navigation("Experimento");
-                });
-
             modelBuilder.Entity("NewtlabAPI.Models.Pregunta", b =>
                 {
                     b.HasOne("NewtlabAPI.Models.BancoPregunta", "BancoPregunta")
@@ -452,7 +426,7 @@ namespace NewtlabAPI.Migrations
                     b.HasOne("NewtlabAPI.Models.PruebaExperimento", "PE")
                         .WithMany("PruebaRespuestas")
                         .HasForeignKey("PEId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("NewtlabAPI.Models.Pregunta", "Pregunta")

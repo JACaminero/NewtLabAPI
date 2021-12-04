@@ -93,44 +93,6 @@ namespace NewtlabAPI.Controllers
             public IEnumerable<PruebaRespuesta> Prs { get; set; }
             public PruebaExperimento Pe { get; set; }
         }
-        //[HttpGet]
-        //public async Task<IActionResult> getAll()
-        //{
-        //    List<object> returnable = new List<object>();
-        //    var users = service.GetAll().ToList();
-        //    string k = "Gravedad";
-
-        //    foreach (var i in users)
-        //    {
-        //        switch (i.ExperimentoId)
-        //        {
-        //            case 1:
-        //                k = "Gravedad";
-        //                break;
-        //            case 2:
-        //                k = "Inercia";
-        //                break;
-        //            case 4:
-        //                k = "Accion y reaccion";
-        //                break;
-        //            default:
-        //                break;
-        //        }
-        //        returnable.Add(new
-        //        {
-        //            bancoPreguntaId = i.BancoPreguntaId,
-        //            tema = i.Tema,
-        //            fechaCreacion = i.FechaCreacion.ToShortDateString(),
-        //            fechaLimite = i.FechaLimite.ToShortDateString(),
-        //            publicado = i.Publicado,
-        //            experimento = k,
-        //            userId = i.UserId,
-        //            isOn = i.IsOn,
-        //            tituloPublicado = i.TituloPublicado,
-        //        });
-        //    }
-        //    return Ok(returnable);
-        //}
-
+       
     }
 }

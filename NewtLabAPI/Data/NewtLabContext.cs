@@ -27,7 +27,8 @@ namespace NewtlabAPI.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.;Database=NewtLab;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Data Source=tcp:newtlabapi.database.windows.net,1433;Initial Catalog=NewLab;User Id=Holascupido@newtlabapi;Password=Holas123");
+            //optionsBuilder.UseSqlServer(@"Server=.;Database=NewtLab;Trusted_Connection=True;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -35,6 +36,12 @@ namespace NewtlabAPI.Data
                 .HasOne(e => e.User)
                 .WithMany()
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<PruebaRespuesta>()
+                .HasOne(e => e.PE)
+                .WithMany(pe => pe.PruebaRespuestas)
+                .HasForeignKey(e => e.PEId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

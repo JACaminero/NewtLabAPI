@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NewtlabAPI.Models
 {
+    [NotMapped]
     public class GuiaExperimento
     {
         [Key]
@@ -14,7 +15,6 @@ namespace NewtlabAPI.Models
         public int Descripcion { get; set; }
         public int Instruccion { get; set; }
         public int Titulo { get; set; }
-        [ForeignKey("ExperimentoId")]
         public Experimento Experimento { get; set; }
     }
 }
